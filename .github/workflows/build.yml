@@ -22,11 +22,14 @@ jobs:
     - name: Install Gradle
       uses: gradle/gradle-build-action@v2
 
+    - name: Set CI_CHUNK_SIZE
+      run: echo "CI_CHUNK_SIZE=1" >> $GITHUB_ENV
+
     - name: Build Release APK
       run: ./gradlew assembleRelease
 
     - name: Upload APK
-      uses: actions/upload-artifact@v4  # updated to v4
+      uses: actions/upload-artifact@v4
       with:
         name: h5ai-extension
         path: '**/*.apk'
